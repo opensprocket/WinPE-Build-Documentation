@@ -1,0 +1,36 @@
+Intro:
+
+How to build a custom Windows Pre-installation Enviroment.
+
+Prerequsites:
+
+Installed the appropriate windows Automated Install Kit (AIK), which is amd64 for 64-bit
+
+Creation of PE (First time):
+
+  Creating required files:
+    copype.cmd amd64 c:\winpe
+      creates a copy of all winpe files in c:\winpe
+
+    copy c:\winpe\winpe.wim c:\winpe\iso\sources\boot.wim
+      moves the stock winpe to the sources folder (for organization) and renames it to boot.wim
+
+    copy "c:\program files\windows aik\tools\amd64\imagex.exe" c:\winpe\iso
+      copies imagex.exe to the folder which contains the files we will pack into the .iso
+
+  Adding Drivers & Servicing .wim file:
+
+    *** Must be run in elevated command prompt!!! ***
+
+    dism /mount-wim /wimfile:"c:\winpe\iso\sources\boot.wim" /index:1 /mountdir:"c:\winpe\mount"
+      Mounts the boot.wim file in the c:\winpe\mount folder.
+
+    dism /unmount-wim /mountdir:"c:\winpe\mount" /commit **OR** /discard
+
+  Packaging into .iso file:
+
+      oscdimg.exe -n -bc:\winpe\etfsboot.com c:\winpe\iso c:\winpe\winpe1.iso
+        -n is for long file paths and names
+        -b is telling us where the boot sector and files are
+        c:\winpe\iso is telling us which files to pack into .iso
+        c:\winpe\winpe1.iso is the output location and file name

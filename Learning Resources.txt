@@ -1,0 +1,6 @@
+Technet:
+
+ImageX commands: https://technet.microsoft.com/en-us/library/cc749447(v=ws.10).aspx
+Overview of WinPE Creation: https://technet.microsoft.com/en-us/library/cc766066(v=ws.10).aspx
+Mounting .wim file for servicing: https://technet.microsoft.com/en-us/library/Dn613857.aspx
+Good Video Tutorial of building WinPE: https://www.youtube.com/watch?v=sQGujsHcq6U
